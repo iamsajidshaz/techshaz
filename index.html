@@ -529,7 +529,7 @@ https://templatemo.com/tm-578-first-portfolio
                                         </div>
 
                                         <div class="col-lg-3 col-12 ms-auto">
-                                            <button type="submit" class="form-control">Send</button>
+                                            <button type="button" class="form-control" onclick="sendToWhatsApp()">Send</button>
                                         </div>
 
                                     </div>
@@ -569,6 +569,36 @@ https://templatemo.com/tm-578-first-portfolio
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/magnific-popup-options.js"></script>
         <script src="js/custom.js"></script>
+
+        <script>
+            function sendToWhatsApp() {
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const website = document.getElementById("inlineCheckbox1").checked ? "Websites" : "";
+                const branding = document.getElementById("inlineCheckbox2").checked ? "Branding" : "";
+                const ecommerce = document.getElementById("inlineCheckbox3").checked ? "Ecommerce" : "";
+                const seo = document.getElementById("inlineCheckbox4").checked ? "SEO" : "";
+                const message = document.getElementById("message").value;
+
+                // Concatenate selected services
+                const services = [website, branding, ecommerce, seo].filter(Boolean).join(", ");
+
+                // Pre-fill the WhatsApp message
+                const whatsappMessage = `Hello, I am ${name}.
+        Email: ${email}
+        Services Interested In: ${services}
+        Message: ${message}`;
+
+                // Encode the message for the WhatsApp URL
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const phoneNumber = "+917406677096"; // Replace with your WhatsApp number
+                const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+                // Open WhatsApp
+                window.open(whatsappLink, "_blank");
+            }
+        </script>
+
 
     </body>
 </html>
